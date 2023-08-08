@@ -1,0 +1,4 @@
+omnisint /opt single standalone use one liner strings
+
+
+python pagodo.py -d choicehotels.com -g dorks/dorkmaster.dorks >> /var/log/forensics/pagodo/dorkbrute.log

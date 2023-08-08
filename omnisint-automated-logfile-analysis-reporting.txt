@@ -1,0 +1,60 @@
+Failed Login Analysis:
+
+Extract login attempts from log files.
+Identify failed login attempts by searching for specific patterns or error messages.
+Analyze the correlation between IP addresses, usernames, and timestamps.
+Summarize the top IP addresses with the most failed login attempts.
+Identify common usernames or password patterns used in the failed login attempts.
+Network Traffic Analysis:
+
+Parse network traffic logs to extract relevant information.
+Identify patterns related to network anomalies or suspicious activities.
+Analyze source and destination IP addresses, ports, protocols, and timestamps.
+Correlate the network traffic with known threat intelligence feeds.
+Summarize the top sources or destinations with the most traffic and suspicious behavior.
+System Performance Analysis:
+
+Extract system logs related to performance metrics (CPU, memory, disk, etc.).
+Analyze patterns in performance metrics over time.
+Identify correlations between system events and performance issues.
+Summarize the top processes or services causing performance degradation.
+Highlight any anomalies or deviations from normal behavior.
+Application Error Analysis:
+
+Parse application logs to identify error messages or exceptions.
+Perform pattern matching to categorize errors based on specific criteria.
+Correlate error messages with related application components or modules.
+Analyze timestamps and patterns of error occurrences.
+Summarize the most common or critical application errors.
+These examples showcase how automated log analysis can involve extracting relevant information from log files, performing pattern matching and correlation techniques, and generating a summarized report highlighting key findings or insights. The specific implementation and tools used for log analysis will vary depending on the log format, the target system, and the analysis requirements.
+
+
+def analyze_failed_logins(log_file):
+    failed_logins = []
+    with open(log_file, 'r') as file:
+        for line in file:
+            if 'Failed login' in line:
+                failed_logins.append(line)
+    return failed_logins
+
+def summarize_failed_logins(failed_logins):
+    summary = f"Total failed login attempts: {len(failed_logins)}\n"
+    summary += "Top IP addresses with failed login attempts:\n"
+    ip_counts = {}
+    for login in failed_logins:
+        ip = extract_ip_address(login)
+        ip_counts[ip] = ip_counts.get(ip, 0) + 1
+    sorted_ips = sorted(ip_counts, key=ip_counts.get, reverse=True)
+    for ip in sorted_ips[:5]:
+        summary += f"IP: {ip}, Count: {ip_counts[ip]}\n"
+    return summary
+
+def extract_ip_address(log_entry):
+    # Perform IP address extraction logic based on log entry format
+    pass
+
+# Usage example:
+log_file = 'auth.log'
+failed_logins = analyze_failed_logins(log_file)
+summary = summarize_failed_logins(failed_logins)
+print(summary)
